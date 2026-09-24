@@ -5,6 +5,7 @@ from datetime import datetime
 DB_PATH = os.path.join(os.path.dirname(__file__), "..", "data", "tickets.db")
 
 def init_db():
+    os.makedirs(os.path.dirname(DB_PATH), exist_ok=True)  # ensure the folder exists
     conn = sqlite3.connect(DB_PATH)
     cursor = conn.cursor()
     cursor.execute("""
@@ -24,6 +25,7 @@ def init_db():
     conn.close()
 
 def log_ticket(ticket: dict, classification: dict, status: str):
+    os.makedirs(os.path.dirname(DB_PATH), exist_ok=True)
     conn = sqlite3.connect(DB_PATH)
     cursor = conn.cursor()
     cursor.execute("""
@@ -43,6 +45,7 @@ def log_ticket(ticket: dict, classification: dict, status: str):
     conn.close()
 
 def get_all_logged_tickets():
+    os.makedirs(os.path.dirname(DB_PATH), exist_ok=True)
     conn = sqlite3.connect(DB_PATH)
     conn.row_factory = sqlite3.Row
     cursor = conn.cursor()
